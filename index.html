@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlanBench-XL</title>
+  <meta name="description"
+    content="Project page prototype for PlanBench-XL: Evaluating Long-Horizon Planning of LLM Tool-Use Agents in Large-Scale Tool Ecosystems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" href="./assets/favicon.svg?v=20260613-60" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css?v=20260621-19" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="#top">
+        <span class="brand-mark">PXL</span>
+        <span class="brand-text">PlanBench-XL</span>
+      </a>
+      <div class="nav-main">
+        <nav class="site-nav" aria-label="Paper sections">
+          <a href="#motivation">Motivation</a>
+          <a href="#benchmark">Overview</a>
+          <a href="#leaderboard">Leaderboard</a>
+          <a href="#findings">Analysis</a>
+        </nav>
+        <div class="nav-actions" aria-label="Utilities">
+          <a class="nav-cta nav-cta-primary" href="#explore">Explore Data</a>
+          <a class="nav-cta nav-cta-cite" href="#bibtex">Cite</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="container">
+        <div class="hero-heading">
+          <div class="badge-row">
+            <span class="chip chip-accent">
+              <svg viewBox="0 0 24 24" class="chip-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+                <path d="M12 4.25V6.25" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+                <path
+                  d="M8.25 7.25H15.75C17.13 7.25 18.25 8.37 18.25 9.75V14.75C18.25 16.13 17.13 17.25 15.75 17.25H8.25C6.87 17.25 5.75 16.13 5.75 14.75V9.75C5.75 8.37 6.87 7.25 8.25 7.25Z"
+                  stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" />
+                <circle cx="9.75" cy="12" r="1" fill="currentColor" />
+                <circle cx="14.25" cy="12" r="1" fill="currentColor" />
+                <path d="M9.75 14.5H14.25" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+                <path d="M5.75 11H4.25M19.75 11H18.25M8.5 17.25V19M15.5 17.25V19" stroke="currentColor"
+                  stroke-width="1.9" stroke-linecap="round" />
+              </svg>
+              <span>LLM Agent</span>
+            </span>
+            <span class="chip">
+              <svg viewBox="0 0 24 24" class="chip-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+                <circle cx="6.25" cy="16.25" r="1.5" fill="currentColor" />
+                <circle cx="11" cy="11.5" r="1.5" fill="currentColor" opacity="0.82" />
+                <circle cx="15" cy="14.25" r="1.5" fill="currentColor" opacity="0.64" />
+                <path d="M7.5 15L10 12.75L12.5 12.75L15 14.25L18.5 8.75" stroke="currentColor" stroke-width="1.9"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M15.75 8.75H18.5V11.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span>Long-horizon tool-use</span>
+            </span>
+            <span class="chip">
+              <svg viewBox="0 0 24 24" class="chip-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+                <path d="M5.75 9.25H18.25V17.25H5.75V9.25Z" stroke="currentColor" stroke-width="1.9"
+                  stroke-linejoin="round" />
+                <path d="M9 9.25V7.75C9 6.78 9.78 6 10.75 6H13.25C14.22 6 15 6.78 15 7.75V9.25" stroke="currentColor"
+                  stroke-width="1.9" stroke-linecap="round" />
+                <path d="M5.75 12.5H9.25M14.75 12.5H18.25" stroke="currentColor" stroke-width="1.9"
+                  stroke-linecap="round" />
+                <path d="M9.25 11.25H14.75V13.75H9.25V11.25Z" stroke="currentColor" stroke-width="1.9"
+                  stroke-linejoin="round" />
+              </svg>
+              <span>Large-scale tool ecosystems</span>
+            </span>
+          </div>
+          <h1 class="hero-title">PlanBench-XL</h1>
+          <p class="hero-subtitle">
+            Evaluating <span class="gradient-text">Long-Horizon Planning</span> of LLM Tool-Use Agents in
+            <span class="gradient-text">Large-Scale Tool Ecosystems</span>
+          </p>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="hero-meta" aria-label="Authors and affiliations">
+              <div class="hero-meta-row">
+                <span class="hero-meta-label">Authors</span>
+                <div class="hero-meta-value">Jiayu Liu, Qihan Lin, Cheng Qian, Rui Wang, Emre Can Acikgoz, Xiaocheng Yang, Jiateng Liu, Zhenhailong Wang, Xiusi Chen, Heng Ji, Dilek Hakkani-Tür</div>
+              </div>
+              <div class="hero-meta-row">
+                <span class="hero-meta-label">Affiliations</span>
+                <div class="hero-meta-value">University of Illinois Urbana-Champaign</div>
+              </div>
+            </div>
+            <div class="hero-abstract">
+              <p>
+                <strong class="abstract-emphasis">PlanBench-XL</strong> evaluates whether LLM agents can solve
+                long-horizon
+                retail tasks when tool access is retrieval-limited and plausible
+                tool-use paths may silently fail, forcing adaptive exploration and
+                re-planning.
+              </p>
+            </div>
+            <div class="link-row">
+              <a class="btn btn-primary" 
+                href="https://github.com/JiayuJeff/PlanBench-XL" target="_blank"
+                rel="noopener">
+                <img class="btn-icon" src="./assets/logos/github-logo.png" alt="" aria-hidden="true" />
+                Code
+              </a>
+              <a class="btn btn-primary"
+                href="https://huggingface.co/datasets/JiayuJeff/PlanBench-XL" target="_blank"
+                rel="noopener">
+                <img class="btn-icon" src="./assets/logos/hf-logo.png" alt="" aria-hidden="true" />
+                Data
+              </a>
+              <a class="btn btn-primary" 
+                href="javascript:void(0)">
+                <img class="btn-icon" src="./assets/logos/arxiv-logo.png" alt="" aria-hidden="true" />
+                Paper (placeholder)
+              </a>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="panel-card">
+              <span class="panel-kicker">Paper framing</span>
+              <ul class="hero-points">
+                <li>Agents see only retrieved tool subsets rather than a full menu.</li>
+                <li>Tasks require long multi-step composition over hidden intermediate states.</li>
+                <li>Environmental noise is introduced to simulate unreliable tool ecosystems closer to real-world.</li>
+                <li>Block settings create corrupted tool access by injecting explicit, implicit, and misleading failures.</li>
+                <li>Detailed result and error analyses reveal how agents explore and fail across long-horizon
+                trajectories.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-band">
+      <div class="container">
+        <div class="stats-grid" id="stats-grid"></div>
+      </div>
+    </section>
+
+    <section id="motivation" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="section-num">01</span> Motivation &amp; Abstract</h2>
+        <div class="overview-grid">
+          <div class="overview-text">
+            <p>
+              LLM agents increasingly operate in large tool ecosystems, where real-world tasks require discovering
+              relevant tools,
+              inferring implicit sub-goals, and adapting to dynamic environments over long horizons.
+              However, existing benchmarks rarely evaluate planning under retrieval-limited tool visibility.
+            </p>
+            <p>
+              To address this gap, we introduce <strong class="abstract-emphasis">PlanBench-XL</strong>, an interactive
+              benchmark of 327 retail tasks over 1,665 tools that tests
+              whether agents can iteratively retrieve usable tools, invoke them to uncover intermediate evidence for
+              subsequent calls
+              toward the final goal.
+              PlanBench-XL further features an optional blocking mechanism that simulates real-world unpredictability
+              through missing,
+              failing, or distracting tool functions, forcing agents to detect disrupted paths and adapt at runtime.
+            </p>
+            <p>
+              These results establish PlanBench-XL as a testbed for diagnosing agentic planning failures and highlight
+              the need for
+              robust adaptive planning in long-horizon tasks with large, imperfect tool environments.
+            </p>
+          </div>
+
+          <div class="motivation-stack">
+            <article class="motivation-card">
+              <div class="mini-card-head">
+                <span class="mini-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="mini-card-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.5 7.5H18.5M5.5 12H13.5M5.5 16.5H10.5" stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" />
+                    <path d="M15.5 10.25L18.75 12L15.5 13.75V10.25Z" stroke="currentColor" stroke-width="1.8"
+                      stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <h3>Partial tool visibility</h3>
+              </div>
+              <p>Agents act through retrieval rather than over a globally visible tool list.</p>
+            </article>
+            <article class="motivation-card">
+              <div class="mini-card-head">
+                <span class="mini-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="mini-card-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.75 17.25L10.5 13.5L13.25 16.25L17.25 8.25" stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M14.5 8.25H17.25V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <h3>Long-horizon reasoning</h3>
+              </div>
+              <p>Queries require chaining multiple tools and inferring hidden intermediate sub-goals.</p>
+            </article>
+            <article class="motivation-card">
+              <div class="mini-card-head">
+                <span class="mini-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="mini-card-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3.75L18 6V11.25C18 14.86 15.71 18.14 12 19.5C8.29 18.14 6 14.86 6 11.25V6L12 3.75Z"
+                      stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="M9.5 9.5L14.5 14.5M14.5 9.5L9.5 14.5" stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" />
+                  </svg>
+                </span>
+                <h3>Unreliable tool access</h3>
+              </div>
+              <p>Blocked and misleading tools test whether agents can detect failure signals and re-plan.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benchmark" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title"><span class="section-num">02</span> Benchmark Overview</h2>
+        <div class="overview-figure-block">
+          <div class="figure-card main-figure-card figure-only-card">
+            <img src="./assets/figures/PlanBench_XL.png"
+              alt="Main PlanBench-XL overview figure showing data construction, interaction protocol, and blocking mechanism."
+              class="main-figure-image" />
+            <div class="embedded-note">
+              <div class="embedded-note-head">
+                <span class="mini-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="mini-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M9 18.5H15M9.8 21H14.2M12 3.75C8.82436 3.75 6.25 6.32436 6.25 9.5C6.25 11.4351 7.20601 13.1468 8.67121 14.1886C9.39036 14.6999 9.75 15.4518 9.75 16.25V16.5H14.25V16.25C14.25 15.4518 14.6096 14.6999 15.3288 14.1886C16.794 13.1468 17.75 11.4351 17.75 9.5C17.75 6.32436 15.1756 3.75 12 3.75Z"
+                      stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <div class="figure-label">How to read it</div>
+              </div>
+              <ul class="plain-list compact-list">
+                <li>How datatypes and tools are constructed</li>
+                <li>How the agent interacts with the retriever and backend</li>
+                <li>How blocked tools preserve solvability but break direct paths</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-grid benchmark-card-grid">
+          <article class="card">
+            <div class="mini-card-head">
+              <span class="mini-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="mini-card-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.5 6.75H18.5V17.25H5.5V6.75Z" stroke="currentColor" stroke-width="1.8"
+                    stroke-linejoin="round" />
+                  <path d="M9 6.75V17.25M14.75 10.5H18.5M14.75 13.75H18.5" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" />
+                </svg>
+              </span>
+              <div class="mini-card-copy">
+                <div class="card-tag">Tool Library</div>
+                <h3>Typed retail tool ecosystem</h3>
+              </div>
+            </div>
+            <p>
+              Tools are defined over domain datatypes, making tool affordances
+              explicit and searchable. The current repo snapshot already supports
+              a substantial baseline inventory for browsing and filtering.
+            </p>
+          </article>
+          <article class="card">
+            <div class="mini-card-head">
+              <span class="mini-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="mini-card-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 7.25H11V11.25H7V7.25Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                  <path d="M13 12.75H17V16.75H13V12.75Z" stroke="currentColor" stroke-width="1.8"
+                    stroke-linejoin="round" />
+                  <path d="M11 9.25H14C15.66 9.25 17 10.59 17 12.25V12.75" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" />
+                </svg>
+              </span>
+              <div class="mini-card-copy">
+                <div class="card-tag">Interaction Loop</div>
+                <h3>Retrieve, call, answer</h3>
+              </div>
+            </div>
+            <p>
+              Each query unfolds as a multi-turn loop: the agent retrieves
+              candidate tools, executes structured tool calls, and eventually
+              returns a final answer under a visible step budget.
+            </p>
+          </article>
+          <article class="card">
+            <div class="mini-card-head">
+              <span class="mini-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="mini-card-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 3.75L18 6V11.25C18 14.86 15.71 18.14 12 19.5C8.29 18.14 6 14.86 6 11.25V6L12 3.75Z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                  <path d="M9.5 12H14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </span>
+              <div class="mini-card-copy">
+                <div class="card-tag">Blocking Module</div>
+                <h3>Adaptive re-planning under noise</h3>
+              </div>
+            </div>
+            <p>
+              The blocked setting replaces critical path tools with explicit
+              failures, implicit failures, or semantically misleading
+              alternatives while preserving at least one feasible path.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="leaderboard" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="section-num">03</span> Leaderboard</h2>
+
+        <div class="results-shell leaderboard-shell">
+          <div class="table-wrap">
+            <table class="metric-table">
+              <colgroup>
+                <col class="leaderboard-col-rank" />
+                <col class="leaderboard-col-model" />
+                <col class="leaderboard-col-metric" />
+                <col class="leaderboard-col-metric" />
+                <col class="leaderboard-col-metric" />
+                <col class="leaderboard-col-metric" />
+                <col class="leaderboard-col-metric" />
+                <col class="leaderboard-col-metric" />
+                <col class="leaderboard-col-metric" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th rowspan="2">Rank</th>
+                  <th rowspan="2">Model Name</th>
+                  <th colspan="3">Task Completion</th>
+                  <th colspan="2">Exploration Behavior</th>
+                  <th colspan="2">Execution Quality</th>
+                </tr>
+                <tr>
+                  <th>Accuracy (%) ↑</th>
+                  <th>EGT Prec. (%) ↑</th>
+                  <th>Avg. Turns</th>
+                  <th>Mean EDT</th>
+                  <th>S/C Ratio</th>
+                  <th>ITCR (%) ↓</th>
+                  <th>UIRR (%) ↓</th>
+                </tr>
+              </thead>
+              <tbody id="default-results-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="findings" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title"><span class="section-num">04</span> Findings &amp; Analysis</h2>
+        <div class="finding-grid">
+          <article class="finding-card">
+            <div class="finding-head">
+              <span class="finding-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="finding-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="6" cy="6.5" r="1.75" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="18" cy="6.5" r="1.75" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="6" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="18" cy="17.5" r="1.75" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M7.75 6.5H16.25M6 8.25V15.75M18 8.25V15.75M7.75 17.5H13.5" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M12.75 10.5L15.75 13.5L18 11.25" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <h3>The results show a sharp divide between frontier models and the rest.</h3>
+            </div>
+            <p>
+              Frontier models achieve the strongest performance while maintaining high execution relevance. Most other models remain
+              substantially weaker, showing the difficulty of long-horizon, exploration-driven planning across large tool ecosystems.
+              The gaps also appear within model families, where larger variants outperform smaller ones and full frontier models
+              exceed their lightweight versions. Overall, both model family and scale matter for this task.
+            </p>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head">
+              <span class="finding-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="finding-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10.5" cy="10.5" r="4.75" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M14 14L18.5 18.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M17.5 5.25V8.75M15.75 7H19.25" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" />
+                </svg>
+              </span>
+              <h3>Exploration tendency strongly relates to task success.</h3>
+            </div>
+            <p>
+              Broad retrieval can expose agents to more potential intermediate information, making exploration tendency strongly
+              associated with task success. Across models, agents that uncover more intermediate information are generally more likely to complete the
+              task successfully. However, broad retrieval remains only one part of effective long-horizon tool use, since success also
+              depends on whether agents can use the discovered information correctly.
+            </p>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head">
+              <span class="finding-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="finding-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="6.75" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M12 3.75V6.25M12 17.75V20.25M20.25 12H17.75M6.25 12H3.75" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </span>
+              <h3>Frequent retrieval does not guarantee effective exploration.</h3>
+            </div>
+            <p>
+              A high Search-to-Call Ratio and a large number of interaction turns indicate that an agent spends
+              substantial effort on
+              retrieval, but such effort does not necessarily translate into broad discovery of useful intermediate
+              information.
+              Frequent searching and long interactions are not sufficient for effective exploration. An agent may search
+              proactively,
+              but if these searches repeatedly revisit unuseful or uninformative tools, they contribute little to the
+              discovery of new
+              task-relevant datatypes.
+            </p>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head">
+              <span class="finding-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="finding-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 3.75L18 6V11.25C18 14.86 15.71 18.14 12 19.5C8.29 18.14 6 14.86 6 11.25V6L12 3.75Z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                  <path d="M9.25 11.75L11.25 13.75L14.75 10.25" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <h3>Effective tool discovery requires bi-directional anticipation.</h3>
+            </div>
+            <p>
+              Across
+              models, agents generally issue more input-conditioned retrievals, indicating a common preference for forward
+              anticipation. However, retrieving tools compatible with available inputs is often insufficient. Agents may find
+              executable next steps but fail to reason backward about which intermediate datatypes are needed to reach the final goal.
+              Effective tool discovery therefore requires combining forward exploration from current evidence with backward
+              anticipation from the desired outcome.
+            </p>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head">
+              <span class="finding-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="finding-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.75 6.75H19.25M7.75 6.75V17.25M16.25 6.75V17.25M4.75 17.25H19.25" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M9.25 10.25H14.75M9.25 13.75H12.25" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" />
+                </svg>
+              </span>
+              <h3>Beyond effective exploration, successful agents must accurately exploit the information they uncover.
+              </h3>
+            </div>
+            <p>
+              EGT Precision captures whether executed tool calls stay on task-relevant paths. Models are much more
+              likely to succeed
+              when they execute relevant tool-use trajectories. The strongest models further support this pattern by
+              attaining both
+              high accuracy and high execution relevance. These results suggest that effective long-horizon tool use
+              requires not only
+              sufficient exploration, but also precise execution over the explored tool space.
+            </p>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head">
+              <span class="finding-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="finding-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 4.25V7.25M12 16.75V19.75M4.25 12H7.25M16.75 12H19.75" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M8.5 8.5L10.75 10.75M15.5 8.5L13.25 10.75M8.5 15.5L10.75 13.25M15.5 15.5L13.25 13.25"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="2.25" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </span>
+              <h3>Accurate exploration and exploitation also depend on reliable tool-use.</h3>
+            </div>
+            <p>
+              Models that frequently make invalid tool calls are much less likely to complete the task successfully.
+              Effective
+              long-horizon tool use requires not only broad exploration and accurate exploitation, but also basic
+              reliability in
+              invoking tools with valid arguments. Invalid tool calls alone do not explain performance differences, and
+              failures also
+              arise from ineffective exploration and exploitation.
+            </p>
+          </article>
+        </div>
+
+        <div class="takeaway-shell">
+          <div class="panel-head">
+            <h3 class="panel-title">Takeaway</h3>
+          </div>
+
+          <div class="takeaway-grid">
+            <div class="takeaway-column">
+              <div class="takeaway-column-label">
+                <span class="soft-pill takeaway-label-pill takeaway-label-experiment">Experiment Results</span>
+              </div>
+              <div id="takeaway-experiment-stage" class="takeaway-stage" aria-live="polite"></div>
+              <div class="takeaway-nav">
+                <button id="takeaway-experiment-prev" class="takeaway-btn" type="button"
+                  aria-label="Previous experiment result takeaway">Prev</button>
+                <div class="takeaway-progress">
+                  <div id="takeaway-experiment-counter" class="takeaway-counter"></div>
+                  <div id="takeaway-experiment-dots" class="takeaway-dots"
+                    aria-label="Experiment result takeaway pagination"></div>
+                </div>
+                <button id="takeaway-experiment-next" class="takeaway-btn" type="button"
+                  aria-label="Next experiment result takeaway">Next</button>
+              </div>
+            </div>
+
+            <div class="takeaway-column">
+              <div class="takeaway-column-label">
+                <span class="soft-pill takeaway-label-pill takeaway-label-analysis">Further Analysis</span>
+              </div>
+              <div id="takeaway-analysis-stage" class="takeaway-stage" aria-live="polite"></div>
+              <div class="takeaway-nav">
+                <button id="takeaway-analysis-prev" class="takeaway-btn" type="button"
+                  aria-label="Previous further analysis takeaway">Prev</button>
+                <div class="takeaway-progress">
+                  <div id="takeaway-analysis-counter" class="takeaway-counter"></div>
+                  <div id="takeaway-analysis-dots" class="takeaway-dots"
+                    aria-label="Further analysis takeaway pagination"></div>
+                </div>
+                <button id="takeaway-analysis-next" class="takeaway-btn" type="button"
+                  aria-label="Next further analysis takeaway">Next</button>
+              </div>
+            </div>
+
+            <div class="takeaway-column">
+              <div class="takeaway-column-label">
+                <span class="soft-pill takeaway-label-pill takeaway-label-error">Error Analysis</span>
+              </div>
+              <div id="takeaway-error-stage" class="takeaway-stage" aria-live="polite"></div>
+              <div class="takeaway-nav">
+                <button id="takeaway-error-prev" class="takeaway-btn" type="button"
+                  aria-label="Previous error analysis takeaway">Prev</button>
+                <div class="takeaway-progress">
+                  <div id="takeaway-error-counter" class="takeaway-counter"></div>
+                  <div id="takeaway-error-dots" class="takeaway-dots" aria-label="Error analysis takeaway pagination">
+                  </div>
+                </div>
+                <button id="takeaway-error-next" class="takeaway-btn" type="button"
+                  aria-label="Next error analysis takeaway">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="explore" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="section-num">05</span> Explore the Data</h2>
+        <p class="explore-lead">
+          Real samples from the benchmark — click a tab to switch the view.
+        </p>
+
+        <div class="tabs" role="tablist">
+          <button class="tab-btn active" data-tab="tools" role="tab">Tools</button>
+          <button class="tab-btn" data-tab="datatypes" role="tab">Datatypes</button>
+          <button class="tab-btn" data-tab="queries" role="tab">Queries</button>
+          <button class="tab-btn" data-tab="paths" role="tab">Paths</button>
+        </div>
+
+        <div class="tab-panel active" data-panel="tools">
+          <div class="panel-head">
+            <h3 class="panel-title">Tool explorer</h3>
+          </div>
+
+          <div class="tool-shell">
+            <div class="tool-controls">
+              <label class="field">
+                <span>Keyword</span>
+                <input id="search-input" type="search"
+                  placeholder="Search tool name, description, datatype, or parameter..." />
+              </label>
+
+              <label class="field">
+                <span>Input datatype contains</span>
+                <select id="input-filter">
+                  <option value="">All input datatypes</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Output datatype</span>
+                <select id="output-filter">
+                  <option value="">All output datatypes</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Input arity</span>
+                <select id="arity-filter">
+                  <option value="">Any</option>
+                  <option value="1">1 input</option>
+                  <option value="2">2 inputs</option>
+                  <option value="3">3 inputs</option>
+                  <option value="4">4 inputs</option>
+                  <option value="5+">5+ inputs</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Tool type</span>
+                <select id="family-filter">
+                  <option value="">All tool types</option>
+                  <option value="gold">Golden tools</option>
+                  <option value="noisy">Noisy tools</option>
+                  <option value="blocker">Blocker tools</option>
+                </select>
+              </label>
+
+              <div class="tool-controls-actions">
+                <label class="checkbox-field">
+                  <input id="strict-filter" type="checkbox" />
+                  <span>Strict schema only</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="tool-meta">
+              <div class="tool-meta-left">
+                <button id="clear-filters" class="btn btn-soft" type="button">Clear filters</button>
+                <div id="filter-summary" class="filter-summary"></div>
+              </div>
+              <div id="tool-count" class="tool-count"></div>
+            </div>
+
+            <div id="tool-results" class="tool-grid" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="datatypes">
+          <div class="panel-head">
+            <h3 class="panel-title">Datatypes explorer</h3>
+          </div>
+          <div class="datatype-toolbar">
+            <label class="field datatype-field">
+              <span>Category</span>
+              <select id="datatype-category-filter" aria-label="Filter datatypes by category"></select>
+            </label>
+            <div id="datatype-count" class="datatype-count" aria-live="polite"></div>
+          </div>
+          <div id="datatype-grid" class="datatype-grid"></div>
+        </div>
+
+        <div class="tab-panel" data-panel="queries">
+          <div class="panel-head">
+            <h3 class="panel-title">Sample queries</h3>
+          </div>
+          <div id="query-grid" class="query-grid"></div>
+        </div>
+
+        <div class="tab-panel" data-panel="paths">
+          <div class="panel-head">
+            <h3 class="panel-title">Sample ground-truth paths</h3>
+          </div>
+          <div id="path-grid" class="path-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bibtex" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title"><span class="section-num">06</span> Bibtex</h2>
+        <div class="citation-shell">
+          <div class="panel-head">
+            <p class="panel-sub">If you find <strong class="abstract-emphasis">PlanBench-XL</strong> helpful, please
+              kindly cite as:</p>
+          </div>
+          <pre class="citation-block">@article{planbench_xl,
+  title = {},
+  author = {},
+  journal = {},
+  year = {}
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js?v=20260621-11"></script>
+</body>
+
+</html>
