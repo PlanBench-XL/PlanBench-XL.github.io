@@ -63442,13 +63442,13 @@
               "placeholder": "Invoked block distribution figure placeholder",
               "src": "./assets/figures/invoked_block_type.png",
               "alt": "Models' invoked block type distribution figure",
-              "caption": "Distribution of invoked block alternatives under <em>mixed</em> blocking. For each model, the horizontal bar normalizes all invoked block alternatives to 100%. Colors indicate whether the invoked block alternative is an explicit failure, implicit failure, or semantic misleading tool. We abbreviate <em>GPT-5.4</em>, <em>Gemini-3.5-Flash</em>, <em>DeepSeek-V4-Flash</em>, and <em>Llama-3.3-70B-Instruct</em> as <em>GPT</em>, <em>Gemini</em>, <em>DeepSeek</em>, and <em>Llama</em>."
+              "caption": "Distribution of invoked block alternatives under <em>explicit</em>, <em>implicit</em>, or <em>misleading</em> blocking. For each model, the horizontal bar normalizes all invoked block alternatives to 100%. Colors indicate the three different types of invoked block alternatives. We abbreviate <em>GPT-5.4</em>, <em>Gemini-3.5-Flash</em>, <em>DeepSeek-V4-Flash</em>, and <em>Llama-3.3-70B-Instruct</em> as <em>GPT</em>, <em>Gemini</em>, <em>DeepSeek</em>, and <em>Llama</em>."
             },
             {
               "placeholder": "Follow-up behavior figure placeholder",
               "src": "./assets/figures/follow_up_behavior.png",
               "alt": "Models' follow-up behavior distribution figure",
-              "caption": "Follow-up behavior after agents invoke block alternatives under <em>mixed</em> blocking. Each column corresponds to one model and one block type. The row length shows the ratio of all invoked block alternatives for that model, and colored segments denote <em>Unused</em>, <em>Search Reused</em>, and <em>Value Reused</em>. <em>GPT</em> denotes <em>GPT-5.4</em>, <em>Gemini</em> denotes <em>Gemini-3.5-Flash</em>, <em>DeepSeek</em> denotes <em>DeepSeek-V4-Flash</em>, and <em>Llama</em> denotes <em>Llama-3.3-70B-Instruct</em>."
+              "caption": "Follow-up behavior after agents invoke block alternatives under <em>explicit</em>, <em>implicit</em>, or <em>misleading</em> blocking. Each column corresponds to one model and one block type. The row length shows the ratio of all invoked block alternatives for that model, and colored segments denote <em>Unused</em>, <em>Search Reused</em>, and <em>Value Reused</em>. <em>GPT</em> denotes <em>GPT-5.4</em>, <em>Gemini</em> denotes <em>Gemini-3.5-Flash</em>, <em>DeepSeek</em> denotes <em>DeepSeek-V4-Flash</em>, and <em>Llama</em> denotes <em>Llama-3.3-70B-Instruct</em>."
             }
           ]
         }
