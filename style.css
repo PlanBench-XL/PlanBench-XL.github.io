@@ -925,6 +925,52 @@ pre {
   box-shadow: var(--shadow-sm);
 }
 
+.citation-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.copy-citation-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid rgba(44, 94, 86, 0.22);
+  border-radius: 999px;
+  background: rgba(44, 94, 86, 0.1);
+  color: var(--accent-2);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.copy-citation-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(44, 94, 86, 0.34);
+  background: rgba(44, 94, 86, 0.15);
+}
+
+.copy-citation-btn:disabled {
+  cursor: wait;
+}
+
+.copy-citation-btn.copied {
+  border-color: rgba(178, 81, 45, 0.28);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.copy-citation-icon {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
 .citation-block {
   margin: 0;
   padding: 18px 20px;
@@ -2096,5 +2142,10 @@ pre {
 
   .takeaway-progress {
     justify-items: center;
+  }
+
+  .citation-head {
+    grid-template-columns: 1fr;
+    align-items: start;
   }
 }

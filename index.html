@@ -13,7 +13,7 @@
     href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="icon" href="./assets/favicon.svg?v=20260613-60" type="image/svg+xml" />
-  <link rel="stylesheet" href="./style.css?v=20260621-19" />
+  <link rel="stylesheet" href="./style.css?v=20260623-01" />
 </head>
 
 <body>
@@ -129,9 +129,11 @@
                 Data
               </a>
               <a class="btn btn-primary" 
-                href="javascript:void(0)">
+                href="https://arxiv.org/pdf/2606.22388"
+                 target="_blank"
+                rel="noopener">
                 <img class="btn-icon" src="./assets/logos/arxiv-logo.png" alt="" aria-hidden="true" />
-                Paper (placeholder)
+                Paper
               </a>
             </div>
           </div>
@@ -694,22 +696,35 @@
       <div class="container">
         <h2 class="section-title"><span class="section-num">06</span> Bibtex</h2>
         <div class="citation-shell">
-          <div class="panel-head">
+          <div class="panel-head citation-head">
             <p class="panel-sub">If you find <strong class="abstract-emphasis">PlanBench-XL</strong> helpful, please
               kindly cite as:</p>
+            <button class="copy-citation-btn" id="copy-citation" type="button" aria-label="Copy BibTeX citation">
+              <svg viewBox="0 0 24 24" class="copy-citation-icon" width="17" height="17" fill="none"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M8.25 8.25H17.25V17.25H8.25V8.25Z" stroke="currentColor" stroke-width="1.8"
+                  stroke-linejoin="round" />
+                <path d="M6.75 15.75H5.75C5.2 15.75 4.75 15.3 4.75 14.75V5.75C4.75 5.2 5.2 4.75 5.75 4.75H14.75C15.3 4.75 15.75 5.2 15.75 5.75V6.75"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+              <span>Copy</span>
+            </button>
           </div>
-          <pre class="citation-block">@article{planbench_xl,
-  title = {},
-  author = {},
-  journal = {},
-  year = {}
+          <pre class="citation-block" id="citation-bibtex">@misc{liu2026planbenchxlevaluatinglonghorizonplanning,
+  title={PlanBench-XL: Evaluating Long-Horizon Planning of LLM Tool-Use Agents in Large-Scale Tool Ecosystems},
+  author={Jiayu Liu and Qihan Lin and Cheng Qian and Rui Wang and Emre Can Acikgoz and Xiaocheng Yang and Jiateng Liu and Zhenhailong Wang and Xiusi Chen and Heng Ji and Dilek Hakkani-Tür},
+  year={2026},
+  eprint={2606.22388},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  url={https://arxiv.org/abs/2606.22388},
 }</pre>
         </div>
       </div>
     </section>
   </main>
 
-  <script type="module" src="./app.js?v=20260621-11"></script>
+  <script type="module" src="./app.js?v=20260623-01"></script>
 </body>
 
 </html>

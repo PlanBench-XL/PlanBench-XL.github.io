@@ -334,6 +334,60 @@ function setupTabs() {
   });
 }
 
+async function copyTextToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.top = "-999px";
+  textarea.style.left = "-999px";
+  document.body.appendChild(textarea);
+  textarea.select();
+  const copied = document.execCommand("copy");
+  textarea.remove();
+
+  if (!copied) {
+    throw new Error("Copy command was not available.");
+  }
+}
+
+function setupCitationCopy() {
+  const button = byId("copy-citation");
+  const citation = byId("citation-bibtex");
+  if (!button || !citation) return;
+
+  const label = button.querySelector("span");
+  const initialLabel = label?.textContent || "Copy";
+  let resetTimer;
+
+  button.addEventListener("click", async () => {
+    const text = citation.textContent.trim();
+    if (!text) return;
+
+    button.disabled = true;
+    try {
+      await copyTextToClipboard(text);
+      button.classList.add("copied");
+      if (label) label.textContent = "Copied";
+    } catch (error) {
+      if (label) label.textContent = "Failed";
+      console.error(error);
+    } finally {
+      button.disabled = false;
+      clearTimeout(resetTimer);
+      resetTimer = window.setTimeout(() => {
+        button.classList.remove("copied");
+        if (label) label.textContent = initialLabel;
+      }, 1800);
+    }
+  });
+}
+
 function renderDatatypePanel(data) {
   const categories = new Map();
   data.datatypes.forEach((dtype) => {
@@ -865,5 +919,6 @@ loadData()
     renderPaths(data.sample_paths || []);
     setupToolExplorer(data);
     setupTabs();
+    setupCitationCopy();
   })
   .catch(renderError);
