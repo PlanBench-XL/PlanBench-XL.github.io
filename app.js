@@ -200,7 +200,7 @@ function renderResultTable(rows, targetId) {
       key: "mean_edt",
       label: "Mean EDT",
       decimals: 2,
-      better: "low",
+      better: "high",
       color: { start: [255, 252, 246], end: [236, 214, 186] },
     },
     {
